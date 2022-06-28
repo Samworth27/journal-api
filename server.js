@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const app = express();
 const port = 4000;
@@ -17,16 +18,20 @@ function uuid() {
 const categories = ["food", "health", "tech", "software"];
 
 const entries = [
-  {id: uuid(), category: "food", entry: "yum i liek food"},
-  {id: uuid(), category: "health", entry: "monster and a durry = helth"},
-  {id: uuid(), category: "tech", entry: "computer go beep boop"},
-  {id: uuid(), category: "software", entry: "my type words for my computer go beep boop"},
-]
+  { id: uuid(), category: "food", entry: "yum i liek food" },
+  { id: uuid(), category: "health", entry: "monster and a durry = helth" },
+  { id: uuid(), category: "tech", entry: "computer go beep boop" },
+  {
+    id: uuid(),
+    category: "software",
+    entry: "my type words for my computer go beep boop",
+  },
+];
 
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send({ name: "Journal API", endpoints: ["/categories","/entries"] });
+  res.send({ name: "Journal API", endpoints: ["/categories", "/entries"] });
 });
 
 app.get("/categories", (req, res) => {
@@ -34,13 +39,20 @@ app.get("/categories", (req, res) => {
 });
 
 app.get("/entries", (req, res) => {
-  res.send(entries);
+  let responseBody = [...entries];
+  responseBody.forEach((entry) => entry.url = `/entries/${entry.id}`);
+  
+  res.send(responseBody);
 });
 
-app.post("/entries", (req, res)=>{
-  const entry = {id:uuid()}
+app.get("/entries/:id", (req, res) => {
+  res.send(entries.find((entry) => entry.id === req.params.id));
+});
+
+app.post("/entries", (req, res) => {
+  const entry = { id: uuid() };
   entry.category = req.body.category;
-  entry.entry = req.body.entry
+  entry.entry = req.body.entry;
   entries.push(entry);
   res.send(entry);
 });
