@@ -1,4 +1,4 @@
-const {mongoose} = require("./connection.js");
+const { mongoose } = require("./connection.js");
 
 const EntryModel = mongoose.model(
   "Entry",
@@ -14,4 +14,14 @@ const EntryModel = mongoose.model(
   })
 );
 
-module.exports = { EntryModel };
+const CategoryModel = mongoose.model(
+  "Category",
+  new mongoose.Schema({
+    name: {
+      type: String,
+      required: true,
+    },
+  })
+);
+
+module.exports = { EntryModel, CategoryModel };
