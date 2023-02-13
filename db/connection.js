@@ -2,6 +2,7 @@
 const mongoose = require("mongoose");
 // const MONGODB_URI = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@cluster0.cdcgg.mongodb.net/?retryWrites=true&w=majority`;
 const MONGODB_URI = `mongodb+srv://xxvii:${process.env.MONGODB_PASS}@cluster0.cdcgg.mongodb.net/journal?retryWrites=true&w=majority`;
+
 mongoose
   .connect(MONGODB_URI)
   .then(() => {

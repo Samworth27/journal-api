@@ -35,7 +35,7 @@ router.post("/", (req, res) => {
           res.status(500).send("Something went wrong on our end");
       }
     } else {
-      res.send(doc);
+      res.status(201).send(doc);
     }
   });
 });

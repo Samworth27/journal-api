@@ -12,7 +12,7 @@ router.get("/", function(req, res, next) {
 });
 
 router.get("/", (req, res) => {
-  res.send({ name: "Journal API", endpoints: `${req.baseUrl}/endpoints`});
+  res.status(200).send({ name: "Journal API", endpoints: `${req.baseUrl}/endpoints`});
 });
 
 router.get("/endpoints", (req, res) => {
